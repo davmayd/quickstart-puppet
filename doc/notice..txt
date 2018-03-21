@@ -1,2 +1,0 @@
-Puppet on the AWS Cloud: Quick Start Reference Deployment
-Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved. 
