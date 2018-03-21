@@ -42,14 +42,14 @@
             "Type": "String",
             "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
             "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
-            "Default": "quickstart-reference",
+            "Default": "aws-quickstart",
             "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)."
         },
         "QSS3KeyPrefix": {
             "Type": "String",
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "puppet/latest/",
+            "Default": "quickstart-puppet/",
             "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)."
         }
     },
@@ -121,9 +121,9 @@
     "Conditions": {
         "GovCloudCondition": {
             "Fn::Equals": [{
-                    "Ref": "AWS::Region"
-                },
-                "us-gov-west-1"
+                "Ref": "AWS::Region"
+            },
+            "us-gov-west-1"
             ]
         }
     },
@@ -133,17 +133,17 @@
             "Properties": {
                 "TemplateURL": { 
                     "Fn::Sub": [
-                           "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Puppet-VPC.template",
-                           {
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/Puppet-VPC.template",
+                        {
                             "QSS3Region": {
                                 "Fn::If": [
                                     "GovCloudCondition",
                                     "s3-us-gov-west-1",
                                     "s3"
-                                ]
+                                   ]
                             }
-                           }
-                       ]
+                        }
+                    ]
                 },
                 "Parameters": {
                     "KeyPairName": {
