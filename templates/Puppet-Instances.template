@@ -569,7 +569,7 @@
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDnsSuffix.ps1"
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                                 }
                             },
                             "c:\\cfn\\downloads\\GeoTrust_Global_CA.pem": {
