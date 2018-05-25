@@ -547,28 +547,38 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source": {
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                }
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source": {
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                }
                             },
                             "c:\\cfn\\downloads\\puppet-latest.msi": {
                                 "source": "https://downloads.puppetlabs.com/windows/puppet-latest.msi"
                             },
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/New-LocalAdministrator.ps1"
+                                "source": {
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1"
+                                }
                             },
                             "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3134758-x64.msu": {
                                 "source": "https://download.microsoft.com/download/2/C/6/2C6E1B4A-EBE5-48A6-B225-2D2058A9CEFB/Win8.1AndW2K12R2-KB3134758-x64.msu"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/exchange/latest/scripts/Set-PrimaryDnsSuffix.ps1"
+                                "source": {
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDnsSuffix.ps1"
+                                }
                             },
                             "c:\\cfn\\downloads\\GeoTrust_Global_CA.pem": {
                                 "source": "https://www.geotrust.com/resources/root_certificates/certificates/GeoTrust_Global_CA.pem"
                             },
                             "c:\\cfn\\scripts\\PuppetAgentWindowsInit.bat": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/puppet/latest/scripts/iisserver/PuppetAgentWindowsInit.bat"
+                                "source": {
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/iisserver/PuppetAgentWindowsInit.bat"
+                                }
                             }
                         },
                         "commands": {
