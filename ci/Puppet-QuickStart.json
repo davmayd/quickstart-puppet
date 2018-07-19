@@ -1,10 +1,14 @@
 [
   {
     "ParameterKey": "KeyPairName",
-    "ParameterValue": "cikey"
+    "ParameterValue": "override"
   },
   {
     "ParameterKey": "RemoteAdminCIDR",
     "ParameterValue": "10.0.0.0/16"
+  },
+  {
+    "ParameterKey":"QSS3BucketName",
+    "ParameterValue":"$[taskcat_autobucket]"
   }
 ]
