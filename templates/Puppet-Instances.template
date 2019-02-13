@@ -19,8 +19,7 @@
                     },
                     "Parameters": [
                         "VPC",
-                        "VPCCIDR",
-                        "SubnetCIDR"
+                        "VPCCIDR"
                     ]
                 },
                 {
@@ -29,8 +28,7 @@
                     },
                     "Parameters": [
                         "PuppetMasterIP",
-                        "PuppetAgentLinuxIP",
-                        "PuppetAgentWindowsIP"
+                        "PuppetAgentLinuxIP"
                     ]
                 }
             ],
@@ -47,17 +45,11 @@
                 "VPCCIDR": {
                     "default": "CIDR Address for the VPC"
                 },
-                "SubnetCIDR": {
-                    "default": "CIDR Address for the Subnet"
-                },
                 "PuppetMasterIP": {
                     "default": "IP Address for Puppet Master"
                 },
                 "PuppetAgentLinuxIP": {
                     "default": "IP Address for the Linux Agent"
-                },
-                "PuppetAgentWindowsIP": {
-                    "default": "IP Address for the Windows Agent"
                 }
             }
         }
@@ -90,16 +82,15 @@
             "Type": "String",
             "Default": "10.0.0.11"
         },
-        "PuppetAgentWindowsIP": {
-            "Description": "IP for the Puppet agent",
-            "Type": "String",
-            "Default": "10.0.0.12"
-        },
         "VPCCIDR": {
             "Description": "CIDR block for the VPC",
             "Type": "String",
             "Default": "10.0.0.0/16",
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
+        },
+        "Windows2012AMI": {
+            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default": "/aws/service/ami-windows-latest/Windows_Server-2012-R2_RTM-English-64Bit-Base"
         },
         "QSS3BucketName": {
             "Type": "String",
@@ -120,63 +111,48 @@
         "AWSAMIRegionMap": {
             "AMI": {
                 "US1404HVM": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-20190122.1",
-                "WS2012R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-2019.01.10"
             },
             "ap-northeast-1": {
                 "US1404HVM": "ami-09a19edcb709d7a77",
-                "WS2012R2": "ami-041ca9f602d54b01b"
             },
             "ap-northeast-2": {
                 "US1404HVM": "ami-0398ca19c23e260d9",
-                "WS2012R2": "ami-0a73aba24bb9790e1"
             },
             "ap-south-1": {
                 "US1404HVM": "ami-0fd6101258e0ebba7",
-                "WS2012R2": "ami-02fc6ca5c10f48653"
             },
             "ap-southeast-1": {
                 "US1404HVM": "ami-0c3763fc97bb117a7",
-                "WS2012R2": "ami-02e12fadafae89d92"
             },
             "ap-southeast-2": {
                 "US1404HVM": "ami-0db7df036ebf22fae",
-                "WS2012R2": "ami-04fc3f443948486bf"
             },
             "ca-central-1": {
                 "US1404HVM": "ami-0992b0b9c07b0eb4d",
-                "WS2012R2": "ami-004fdfaded2cb90fd"
             },
             "eu-central-1": {
                 "US1404HVM": "ami-05abe2b78a8130c27",
-                "WS2012R2": "ami-0fdf4195d1347fd21"
             },
             "eu-west-1": {
                 "US1404HVM": "ami-0f23faa82d114fc34",
-                "WS2012R2": "ami-0554a258b2d354e3a"
             },
             "eu-west-2": {
                 "US1404HVM": "ami-0c967c70f8d9a12ca",
-                "WS2012R2": "ami-070f24f54f61301ae"
             },
             "sa-east-1": {
                 "US1404HVM": "ami-06d69f6c430635efe",
-                "WS2012R2": "ami-0603a5487f1fecaae"
             },
             "us-east-1": {
                 "US1404HVM": "ami-08b8af1c94b41235d",
-                "WS2012R2": "ami-0c34e56c5b17e933d"
             },
             "us-east-2": {
                 "US1404HVM": "ami-037d9ee5685d75d4d",
-                "WS2012R2": "ami-0b9f2ce3712362653"
             },
             "us-west-1": {
                 "US1404HVM": "ami-0a4acfd7b7b3c7b35",
-                "WS2012R2": "ami-0c2a33c441de89a37"
             },
             "us-west-2": {
                 "US1404HVM": "ami-0871409b5c1c6b128",
-                "WS2012R2": "ami-0b144285224a57d53"
             }
         }
     },
@@ -325,14 +301,14 @@
                 "InstanceType": "t2.medium",
                 "NetworkInterfaces": [
                     {
-                        "DeleteOnTermination": "true",
-                        "DeviceIndex": 0,
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": '0',
                         "SubnetId": {
                             "Ref": "SubnetId"
                         },
                         "PrivateIpAddresses": [
                             {
-                                "Primary": "true",
+                                "Primary": true,
                                 "PrivateIpAddress": {
                                     "Ref": "PuppetMasterIP"
                                 }
@@ -355,7 +331,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
@@ -427,14 +403,14 @@
                 "InstanceType": "t2.medium",
                 "NetworkInterfaces": [
                     {
-                        "DeleteOnTermination": "true",
-                        "DeviceIndex": 0,
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": '0',
                         "SubnetId": {
                             "Ref": "SubnetId"
                         },
                         "PrivateIpAddresses": [
                             {
-                                "Primary": "true",
+                                "Primary": true,
                                 "PrivateIpAddress": {
                                     "Ref": "PuppetAgentLinuxIP"
                                 }
@@ -548,20 +524,20 @@
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
                                 }
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
                                 }
                             },
                             "c:\\cfn\\downloads\\puppet-latest.msi": {
-                                "source": "https://downloads.puppetlabs.com/windows/puppet-latest.msi"
+                                "source": "https://downloads.puppetlabs.com/windows/puppet-3.8.6-x64.msi"
                             },
                             "c:\\cfn\\scripts\\New-LocalAdministrator.ps1": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1"
+                                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/New-LocalAdministrator.ps1"
                                 }
                             },
                             "c:\\cfn\\downloads\\Win8.1AndW2K12R2-KB3134758-x64.msu": {
@@ -569,15 +545,12 @@
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
+                                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                                 }
                             },
-                            "c:\\cfn\\downloads\\GeoTrust_Global_CA.pem": {
-                                "source": "https://www.geotrust.com/resources/root_certificates/certificates/GeoTrust_Global_CA.pem"
-                            },
-                            "c:\\cfn\\scripts\\PuppetAgentWindowsInit.bat": {
+                            "c:\\cfn\\scripts\\UpdateCerts.ps1": {
                                 "source": {
-                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/iisserver/PuppetAgentWindowsInit.bat"
+                                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}scripts/iisserver/UpdateCerts.ps1"
                                 }
                             }
                         },
@@ -629,11 +602,15 @@
                                 },
                                 "waitAfterCompletion": "forever"
                             },
-                            "g-send-signal": {
-                                "command": "c:\\cfn\\scripts\\PuppetAgentWindowsInit.bat",
+                            "g-update-certs": {
+                                "command": "powershell.exe -command c:\\cfn\\scripts\\UpdateCerts.ps1",
                                 "waitAfterCompletion": "0"
                             },
-                            "h-send-signal": {
+                            "h-install-puppetlabs-windows": {
+                                "command": "puppet module install puppetlabs-windows",
+                                "waitAfterCompletion": "0"
+                            },
+                            "i-send-signal": {
                                 "command": "powershell.exe -command Write-AWSQuickStartStatus",
                                 "waitAfterCompletion": "0"
                             }
@@ -658,13 +635,7 @@
                     "Ref": "PuppetHostProfile"
                 },
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "WS2012R2"
-                    ]
+                    "Ref": "Windows2012AMI"
                 },
                 "InstanceType": "t2.medium",
                 "SubnetId": {
@@ -680,7 +651,7 @@
                     {
                         "DeviceName": "/dev/sda1",
                         "Ebs": {
-                            "VolumeSize": "50",
+                            "VolumeSize": 50,
                             "VolumeType": "gp2"
                         }
                     }
@@ -732,32 +703,32 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "8140",
-                        "ToPort": "8140",
+                        "FromPort": 8140,
+                        "ToPort": 8140,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
@@ -775,24 +746,24 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
+                        "FromPort": 22,
+                        "ToPort": 22,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
@@ -810,24 +781,24 @@
                 "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "3389",
-                        "ToPort": "3389",
+                        "FromPort": 3389,
+                        "ToPort": 3389,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "3389",
-                        "ToPort": "3389",
+                        "FromPort": 3389,
+                        "ToPort": 3389,
                         "CidrIp": {
                             "Ref": "VPCCIDR"
                         }
                     },
                     {
                         "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
+                        "FromPort": 80,
+                        "ToPort": 80,
                         "CidrIp": {
                             "Ref": "RemoteAdminCIDR"
                         }
