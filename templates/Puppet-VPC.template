@@ -2,10 +2,6 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Step 2 of 3: Create the VPC infrastructure for the Puppet Quick Start.",
     "Parameters": {
-        "KeyPairName": {
-            "Description": "Public/private key pair",
-            "Type": "AWS::EC2::KeyPair::KeyName"
-        },
         "SubnetCIDR": {
             "Description": "CIDR block for the public subnet",
             "Type": "String",
@@ -41,7 +37,7 @@
                 "CidrBlock": {
                     "Ref": "VPCCIDR"
                 },
-                "EnableDnsHostnames": "true",
+                "EnableDnsHostnames": true,
                 "Tags": [
                     {
                         "Key": "Application",
@@ -65,7 +61,7 @@
                 "CidrBlock": {
                     "Ref": "SubnetCIDR"
                 },
-                "MapPublicIpOnLaunch": "true",
+                "MapPublicIpOnLaunch": true,
                 "AvailabilityZone": {
                     "Fn::Select": [
                         1,
@@ -184,7 +180,6 @@
         },
         "PuppetMasterDNSRecord": {
             "Type": "AWS::Route53::RecordSet",
-            "DependsOn": "HostedZone",
             "Properties": {
                 "HostedZoneId": {
                     "Fn::Join": [

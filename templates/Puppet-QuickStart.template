@@ -146,9 +146,6 @@
                     ]
                 },
                 "Parameters": {
-                    "KeyPairName": {
-                        "Ref": "KeyPairName"
-                    },
                     "SubnetCIDR": {
                         "Ref": "SubnetCIDR"
                     },
@@ -208,9 +205,6 @@
                     },
                     "PuppetAgentLinuxIP": {
                         "Ref": "PuppetAgentLinuxIP"
-                    },
-                    "PuppetAgentWindowsIP": {
-                        "Ref": "PuppetAgentWindowsIP"
                     },
                     "RemoteAdminCIDR": {
                         "Ref": "RemoteAdminCIDR"
