@@ -1,4 +1,4 @@
 [submodule "submodules/quickstart-microsoft-utilities"]
 	path = submodules/quickstart-microsoft-utilities
-	url = git@github.com:aws-quickstart/quickstart-microsoft-utilities.git
+	url = ../../aws-quickstart/quickstart-microsoft-utilities.git
 	branch = master
