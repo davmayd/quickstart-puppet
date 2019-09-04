@@ -298,7 +298,7 @@
                         "US1404HVM"
                     ]
                 },
-                "InstanceType": "t2.medium",
+                "InstanceType": "t3.medium",
                 "NetworkInterfaces": [
                     {
                         "DeleteOnTermination": true,
@@ -400,7 +400,7 @@
                         "US1404HVM"
                     ]
                 },
-                "InstanceType": "t2.medium",
+                "InstanceType": "t3.medium",
                 "NetworkInterfaces": [
                     {
                         "DeleteOnTermination": true,
